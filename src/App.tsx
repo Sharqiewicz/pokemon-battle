@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { gsap } from "gsap";
 import Loading from './components/loading/Loading'
 
 function App()  {

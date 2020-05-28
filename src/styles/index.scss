@@ -1,8 +1,28 @@
-@import '../../../node_modules/bootstrap/scss/bootstrap.scss';
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+
+
+$project-color: #ee120b;
+$project-color-dark: #e89715;
+$project-second: #3F3D56;
+$project-third: #575A89;
+
+$tablet: 768px;
+$mobile: 576px;
+
 
 body{
-  background-color: #ecc219;
+  background-color: $project-color;
   font-family: 'Acme', sans-serif;
+}
+
+.loading__screen{
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top:0;
+  left:0;
+  z-index: 2;
+  background-color: $project-color;
 }
 
 .loading__container{
@@ -12,4 +32,13 @@ body{
   top: 50%;
   left:50%;
   transform: translate(-50%, -50%);
+  z-index: 3;
+}
+
+.loading__text{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px;
+  font-size: 32px;
 }
