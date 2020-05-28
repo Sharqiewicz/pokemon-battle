@@ -2,9 +2,9 @@ import React, { useRef, useEffect }  from 'react';
 import { gsap } from "gsap";
 import pokeball from '../../img/pokeball.png'
 
-const Pokeball = () =>  <img src={pokeball} className="img-fluid"/>
+const Pokeball: React.FunctionComponent = () =>  <img src={pokeball} className="img-fluid"/>
 
-function Loading(){
+const Loading: React.FunctionComponent = () => {
     const wrapper = useRef(null);
 
     useEffect( () => {
