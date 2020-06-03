@@ -1,65 +1,87 @@
-import React, { FunctionComponent } from 'react';
+import React, { useState, useEffect } from 'react';
 import Loading from './components/loading/Loading'
 import api from './components/api/api-pokemon'
+import Pokemon from './components/interfaces/PokemonInterface'
 
 
+type AppProps = {
 
+}
 
-type PokeProps = {}
+type PokeProps = {
+  pokemon: Pokemon | boolean
+}
 
 type PokeState = {
-  pokemon: Pokemon
+  pokemon: Pokemon | boolean;
 }
 
-type Ability = {
-  name: string
-}
-
-type Abilities = {
-  ability: Ability
-}
-
-type Pokemon = {
-  name: string,
-  height: number,
-  base_experience: number,
-  abilities: Abilities[]
+type AppState = {
+  pokemon: Pokemon | boolean
 }
 
 
-class App extends React.Component <PokeProps, PokeState>  {
-  constructor(props: any){
-      super(props);
-      this.state = {
-        pokemon: {name: 'loading', height: 0, base_experience: 0, abilities: [ { ability: { name: "loading" }}]}
-      }
-      this.getPokemon = this.getPokemon.bind(this);
+function PokemonDashboard ({pokemon}: PokeProps)  {
 
-  }
+  console.log(pokemon);
 
-  getPokemon = async (name: string) =>{
-    const pokemon: Pokemon = await api.get('pikachu');
-    this.setState( {
-      pokemon: pokemon
-    }
-  , () => {  console.log(this.state.pokemon) })
-    return pokemon;
-  }
+  let currentPokemon: Pokemon | boolean; let setCurrentPokemon: Function;
+   [currentPokemon, setCurrentPokemon] = useState(pokemon);
 
-  componentDidMount(){
-    this.getPokemon('pikachu');
-  }
-  render(){
-    const abilities = this.state.pokemon.abilities.map( ability => <h3>{ability.ability.name}</h3>)
-    return (
-      <div className="App">
+  useEffect(() => { setCurrentPokemon(pokemon) }, [pokemon]);
+
+    // PROBLEM WITH INSTANCE OF
+    if( pokemon ){
+      // @ts-ignore
+      const abilities = pokemon.abilities.map( ability => <h3>{ability.ability.name}</h3>)
+
+      return (
+      <>
         <h2>pokemon battle</h2>
-        <h2>{this.state.pokemon.name}</h2>
+        <h2>{
+          // @ts-ignore
+          pokemon.name}</h2>
         <h3>Abilities</h3>
         {abilities}
-      </div>
-    );
-  }
+      </>
+      )
+    }
+    else{
+      return <h1>Loading</h1>
+    }
+}
+
+
+class App extends React.Component<AppProps, AppState>{
+
+    constructor(props: any){
+      super(props);
+      this.state = {
+        pokemon: false,
+      }
+
+      this.getPokemon = this.getPokemon.bind(this);
+    }
+
+    getPokemon = async (name: string) =>{
+      const pokemon: Pokemon = await api.get('pikachu');
+      this.setState( state =>  {
+        return { pokemon }
+      })
+    }
+
+    componentDidMount(){
+      this.getPokemon('pikachu');
+    }
+
+    render(){
+      console.log(this.state)
+      return (
+        <div className="App">
+          <PokemonDashboard pokemon={this.state.pokemon}/>
+        </div>
+      );
+    }
 }
 
 export default App;

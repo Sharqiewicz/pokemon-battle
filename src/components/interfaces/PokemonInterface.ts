@@ -1,4 +1,4 @@
-export default interface PokemonInterface{
+export default class PokemonInterface{
     name: string;
     height: number;
     base_experience: number;
@@ -7,7 +7,7 @@ export default interface PokemonInterface{
     abilities: Abilities[];
     sprites: Sprites[];
     stats: Stats[];
-    types: Type[]
+    types: Type[];
 }
 
 type Sprites = {
