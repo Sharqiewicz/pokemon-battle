@@ -2,15 +2,13 @@ import React, { useRef, useEffect }  from 'react';
 import { gsap } from "gsap";
 import pokeball from '../../img/pokeball.png'
 
-const Pokeball = () =>  <img src={pokeball} className="img-fluid"/>
+const Pokeball: React.FunctionComponent = () =>  <img src={pokeball} className="img-fluid"/>
 
-function Loading(){
+const Loading: React.FunctionComponent = () => {
     const wrapper = useRef(null);
 
     useEffect( () => {
-        // @ts-ignore: Object is possibly 'null'.
         const pokeball: HTMLDivElement = wrapper.current.children[0];
-        // @ts-ignore: Object is possibly 'null'.
         const text: HTMLDivElement = wrapper.current.children[1];
 
         gsap.set(pokeball, { autoAlpha: 0});
