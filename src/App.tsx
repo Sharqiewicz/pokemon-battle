@@ -47,7 +47,7 @@ function PokemonDashboard ({pokemon}: PokeProps)  {
       )
     }
     else{
-      return <h1>Loading</h1>
+      return <Loading/>
     }
 }
 
