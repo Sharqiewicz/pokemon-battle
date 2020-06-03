@@ -11,8 +11,19 @@ type PokeState = {
   pokemon: Pokemon
 }
 
-type Pokemon = {
+type Ability = {
   name: string
+}
+
+type Abilities = {
+  ability: Ability
+}
+
+type Pokemon = {
+  name: string,
+  height: number,
+  base_experience: number,
+  abilities: Abilities[]
 }
 
 
@@ -20,7 +31,7 @@ class App extends React.Component <PokeProps, PokeState>  {
   constructor(props: any){
       super(props);
       this.state = {
-        pokemon: {name: 'loading'}
+        pokemon: {name: 'loading', height: 0, base_experience: 0, abilities: [ { ability: { name: "loading" }}]}
       }
       this.getPokemon = this.getPokemon.bind(this);
 
@@ -39,10 +50,13 @@ class App extends React.Component <PokeProps, PokeState>  {
     this.getPokemon('pikachu');
   }
   render(){
+    const abilities = this.state.pokemon.abilities.map( ability => <h3>{ability.ability.name}</h3>)
     return (
       <div className="App">
         <h2>pokemon battle</h2>
-        <h2>{this.state.pokemon ? this.state.pokemon.name: 'noah'}</h2>
+        <h2>{this.state.pokemon.name}</h2>
+        <h3>Abilities</h3>
+        {abilities}
       </div>
     );
   }
