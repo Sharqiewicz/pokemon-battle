@@ -39,6 +39,6 @@
     "@types/react-dom": "^16.9.8",
     "bootstrap": "^4.5.0",
     "gsap": "^3.2.6",
-    "node-sass": "^4.14.1"
+    "node-sass": "^7.0.0"
   }
 }
